@@ -17,11 +17,11 @@ class _ArarkenTitleState extends State<ArarkenTitle> {
       return TextField(
         decoration: InputDecoration(hintText: "Search by username"),
         onChanged: (search) {
-          print("Search result : $search");
           setState(() {
             AnasayfaModelNesne.aramaKelimesi = search;
             AnasayfaModelNesne.arakelime();
           });
+          print("Search result : ${AnasayfaModelNesne.aramaKelimesi}");
         },
       );
     });
@@ -58,6 +58,7 @@ class _AramazkenIconState extends State<AramazkenIcon> {
         icon: Icon(Icons.search),
         onPressed: () {
           setState(() {
+            AnasayfaModelNesne.checksearch();
             AnasayfaModelNesne.aramaaktif();
           });
         },
@@ -85,6 +86,7 @@ class _ArarkenIconState extends State<ArarkenIcon> {
             AnasayfaModelNesne.aramaaktifdegil();
             AnasayfaModelNesne.aramaKelimesi = "";
           });
+          print(AnasayfaModelNesne.aramaKelimesi);
         },
       );
     });

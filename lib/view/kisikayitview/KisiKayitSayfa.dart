@@ -20,7 +20,12 @@ class _KisiKayitSayfaState extends State<KisiKayitSayfa> {
   var tfsoyisim = TextEditingController();
   var tfdogum_yili = TextEditingController();
   var tftckn = TextEditingController();
+
   DateTime dateTime = DateTime.now();
+
+  final _formKey = GlobalKey<FormState>();
+
+  int epochtime = 0;
 
   Future<void> kayit(String kullanici_adi, String isim, String soyisim,
       String dogum_yili, String tckn) async {
@@ -44,110 +49,129 @@ class _KisiKayitSayfaState extends State<KisiKayitSayfa> {
       ),
       body: Center(
         child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: tfkullanici_adi,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.allow(
-                        RegExp("[A-Za-z0-9#+-.]*")),
-                  ],
-                  decoration: const InputDecoration(hintText: "Username"),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    controller: tfkullanici_adi,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(
+                          RegExp("[A-Za-z0-9#+-.]*")),
+                    ],
+                    decoration: const InputDecoration(hintText: "Username"),
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: tfisim,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp("[a-zA-Z]")),
-                  ],
-                  decoration: const InputDecoration(hintText: "Name"),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    controller: tfisim,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp("[a-zA-Z]")),
+                    ],
+                    decoration: const InputDecoration(hintText: "Name"),
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: tfsoyisim,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp("[a-zA-Z]")),
-                  ],
-                  decoration: const InputDecoration(hintText: "Surname"),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    controller: tfsoyisim,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp("[a-zA-Z]")),
+                    ],
+                    decoration: const InputDecoration(hintText: "Surname"),
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: tfdogum_yili,
-                  decoration: InputDecoration(hintText: "Year of birth"),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: tftckn,
-                  maxLength: 11,
-                  obscureText: true,
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(hintText: "TCKN"),
-                  inputFormatters: <TextInputFormatter>[
-                    FilteringTextInputFormatter.digitsOnly
-                  ],
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton.icon(
-                    icon: const Icon(Icons.calendar_month),
-                    label: const Text("Please select your birthday"),
-                    onPressed: () {
-                      showModalBottomSheet(
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(20),
-                          ),
-                        ),
-                        context: context,
-                        builder: (context) => Center(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              SizedBox(
-                                  height: 72,
-                                  width: 300,
-                                  child: buildDatePicker()),
-                              ElevatedButton(
-                                onPressed: () => Navigator.pop(context),
-                                child: const Text("Done"),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
+                /*Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    controller: tfdogum_yili,
+                    decoration: InputDecoration(hintText: "Year of birth"),
+                  ),
+                ),*/
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    validator: (value) {
+                      int numberofinput = value!.length;
+                      return numberofinput == 11
+                          ? null
+                          : "TCKN must be 11 digits.";
                     },
+                    controller: tftckn,
+                    maxLength: 11,
+                    obscureText: true,
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(hintText: "TCKN"),
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.digitsOnly
+                    ],
                   ),
-                  Text(
-                    DateFormat.yMMMd().format(dateTime),
-                    style: const TextStyle(color: Colors.black),
-                  ),
-                ],
-              )
-            ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton.icon(
+                      icon: const Icon(Icons.calendar_month),
+                      label: const Text("Please select your birthday"),
+                      onPressed: () {
+                        showModalBottomSheet(
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(20),
+                            ),
+                          ),
+                          context: context,
+                          builder: (context) => Center(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                SizedBox(
+                                    height: 72,
+                                    width: 300,
+                                    child: buildDatePicker()),
+                                ElevatedButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: const Text("Done"),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                    Text(
+                      DateFormat.yMMMd().format(dateTime),
+                      style: const TextStyle(color: Colors.black),
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
+          tfdogum_yili.text = epochtime.toString();
+          print(tfdogum_yili.text);
+          if (_formKey.currentState!.validate()) {
+            // If the form is valid, display a snackbar. In the real world,
+            // you'd often call a server or save the information in a database.
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text("Succesffully Saved")),
+            );
+            kayit(tfkullanici_adi.text, tfisim.text, tfsoyisim.text,
+                tfdogum_yili.text, tftckn.text);
+            GoogleSheetsApi.insert(tfkullanici_adi.text, tfisim.text,
+                tfsoyisim.text, tfdogum_yili.text, tftckn.text);
+            setState(() {});
+          }
+
           //tfdogum_yili = DateFormat.yMMMd().format(dateTime);
-          kayit(tfkullanici_adi.text, tfisim.text, tfsoyisim.text,
-              tfdogum_yili.text, tftckn.text);
-          GoogleSheetsApi.insert(tfkullanici_adi.text, tfisim.text,
-              tfsoyisim.text, tfdogum_yili.text, tftckn.text);
-          setState(() {});
         },
         icon: const Icon(Icons.save),
         label: const Text("Save"),
@@ -156,11 +180,12 @@ class _KisiKayitSayfaState extends State<KisiKayitSayfa> {
   }
 
   Widget buildDatePicker() => CupertinoDatePicker(
-        minimumYear: 1900,
-        maximumYear: DateTime.now().year,
-        initialDateTime: DateTime.now(),
-        mode: CupertinoDatePickerMode.date,
-        onDateTimeChanged: (dateTime) =>
-            setState(() => this.dateTime = dateTime),
-      );
+      minimumYear: 1900,
+      maximumYear: DateTime.now().year,
+      initialDateTime: DateTime.now(),
+      mode: CupertinoDatePickerMode.date,
+      onDateTimeChanged: (dateTime) {
+        epochtime = dateTime.millisecondsSinceEpoch;
+        setState(() => this.dateTime = dateTime);
+      });
 }

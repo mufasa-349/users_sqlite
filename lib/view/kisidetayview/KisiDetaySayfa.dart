@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:userswithmvvm/view/homeview/home_view.dart';
 
 import '../../models/Kisiler.dart';
@@ -20,6 +21,12 @@ class _KisiDetaySayfaState extends State<KisiDetaySayfa> {
   var tfdogum_yili = TextEditingController();
   var tftckn = TextEditingController();
 
+  DateTime? thedate;
+
+  void convertepochtonormal() {
+    thedate = DateTime.fromMillisecondsSinceEpoch(int.parse(tfdogum_yili.text));
+  }
+
   Future<void> guncelle(int kisi_id, String kullanici_adi, String isim,
       String soyisim, String dogum_yili, String tckn) async {
     await Kisilerdao()
@@ -37,6 +44,8 @@ class _KisiDetaySayfaState extends State<KisiDetaySayfa> {
     tfsoyisim.text = kisi.soyisim;
     tfdogum_yili.text = kisi.dogum_yili.toString();
     tftckn.text = kisi.tckn.toString();
+    convertepochtonormal();
+    print(thedate);
   }
 
   @override
@@ -98,7 +107,7 @@ class _KisiDetaySayfaState extends State<KisiDetaySayfa> {
                       "Dogum yılı: ",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    Text(tfdogum_yili.text)
+                    Text(DateFormat.yMMMd().format(thedate!))
                   ],
                 ),
               ),

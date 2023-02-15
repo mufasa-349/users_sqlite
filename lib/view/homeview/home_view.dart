@@ -44,9 +44,8 @@ class _AnasayfaState extends State<Anasayfa> {
         ),
         body: WillPopScope(
           onWillPop: uygulamayiKapat,
-          child: Center(
+          child: SingleChildScrollView(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: const <Widget>[HomeBody()],
             ),
           ),

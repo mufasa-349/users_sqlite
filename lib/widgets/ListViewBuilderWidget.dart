@@ -29,10 +29,10 @@ class _ListViewGosterState extends State<ListViewGoster> {
   @override
   Widget build(BuildContext context) {
     return Consumer<AnasayfaModel>(
-      builder: (context, object, child) {
+      builder: (context, AnasayfaModelNesne, child) {
         return FutureBuilder<List<Kisiler>>(
-          future: object.aramaYapiliyorMu
-              ? aramaYap(object.aramaKelimesi)
+          future: AnasayfaModelNesne.aramaYapiliyorMu
+              ? aramaYap(AnasayfaModelNesne.aramaKelimesi)
               : const HomeViewModel().tumKisileriGoster(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
@@ -111,7 +111,9 @@ class _ListViewGosterState extends State<ListViewGoster> {
                     );
                   });
             } else {
-              return const Center();
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
             }
           },
         );
