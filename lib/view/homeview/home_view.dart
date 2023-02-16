@@ -1,11 +1,10 @@
 library home_view;
 
 import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:userswithmvvm/models/HomePageModel.dart';
+import 'package:userswithmvvm/models/excel.dart';
 import 'package:userswithmvvm/widgets/ListViewBuilderWidget.dart';
 
 import '../../viewmodels/home_viewmodel.dart';
@@ -23,6 +22,16 @@ class Anasayfa extends StatefulWidget {
 }
 
 class _AnasayfaState extends State<Anasayfa> {
+  @override
+  void initState() {
+    if (exceleed == false) {
+      excel().excelimport();
+      exceleed = true;
+    }
+    super.initState();
+  }
+
+  bool exceleed = false;
   Future<bool> uygulamayiKapat() async {
     await exit(0);
   }
@@ -46,7 +55,9 @@ class _AnasayfaState extends State<Anasayfa> {
           onWillPop: uygulamayiKapat,
           child: SingleChildScrollView(
             child: Column(
-              children: const <Widget>[HomeBody()],
+              children: const <Widget>[
+                HomeBody(),
+              ],
             ),
           ),
         ),

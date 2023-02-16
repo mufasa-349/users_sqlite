@@ -12,6 +12,7 @@ class _fabState extends State<fab> {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       onPressed: () {
+        setState(() {});
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => KisiKayitSayfa()));
       },

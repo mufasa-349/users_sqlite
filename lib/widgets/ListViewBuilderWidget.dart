@@ -111,9 +111,7 @@ class _ListViewGosterState extends State<ListViewGoster> {
                     );
                   });
             } else {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
+              return const Center();
             }
           },
         );

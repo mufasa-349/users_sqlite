@@ -36,6 +36,8 @@ dependencies:
   sqflite:
   intl: ^0.18.0
   gsheets:
+  file_picker: ^5.2.5
+  excel: ^2.0.1
 
 
   # The following adds the Cupertino Icons font to your application.
