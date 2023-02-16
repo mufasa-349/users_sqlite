@@ -27,11 +27,11 @@ class _KisiKayitSayfaState extends State<KisiKayitSayfa> {
 
   int epochtime = 0;
 
-  Future<void> kayit(String kullanici_adi, String isim, String soyisim,
-      String dogum_yili, String tckn) async {
-    await Kisilerdao().kisiEkle(kullanici_adi, isim, soyisim, dogum_yili, tckn);
+  Future<void> kayit(String kullaniciAdi, String isim, String soyisim,
+      String dogumYili, String tckn) async {
+    await Kisilerdao().kisiEkle(kullaniciAdi, isim, soyisim, dogumYili, tckn);
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => Anasayfa()));
+        context, MaterialPageRoute(builder: (context) => const Anasayfa()));
   }
 
   /* Future<void> ekle(int kisi_id, String kullanici_adi, String isim,

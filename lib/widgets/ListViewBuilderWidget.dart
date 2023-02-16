@@ -21,8 +21,8 @@ class _ListViewGosterState extends State<ListViewGoster> {
     return kisilerListesi;
   }
 
-  Future<void> silmek(int kisi_id) async {
-    await Kisilerdao().kisiSil(kisi_id);
+  Future<void> silmek(int kisiId) async {
+    await Kisilerdao().kisiSil(kisiId);
     setState(() {});
   }
 

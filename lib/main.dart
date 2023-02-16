@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: Anasayfa(),
+        home: const Anasayfa(),
       ),
     );
   }
@@ -46,6 +46,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Anasayfa();
+    return const Anasayfa();
   }
 }

@@ -7,7 +7,6 @@ import 'package:userswithmvvm/models/HomePageModel.dart';
 import 'package:userswithmvvm/models/excel.dart';
 import 'package:userswithmvvm/widgets/ListViewBuilderWidget.dart';
 
-import '../../viewmodels/home_viewmodel.dart';
 import '../kisikayitview/KisiKayitSayfa.dart';
 
 part 'home_appbar.dart';
@@ -33,7 +32,7 @@ class _AnasayfaState extends State<Anasayfa> {
 
   bool exceleed = false;
   Future<bool> uygulamayiKapat() async {
-    await exit(0);
+    exit(0);
   }
 
   @override
@@ -43,12 +42,12 @@ class _AnasayfaState extends State<Anasayfa> {
       return Scaffold(
         appBar: AppBar(
           title: AnasayfaModelNesne.aramaYapiliyorMu
-              ? ArarkenTitle()
-              : AramazkenTitle(),
+              ? const ArarkenTitle()
+              : const AramazkenTitle(),
           actions: [
             AnasayfaModelNesne.aramaYapiliyorMu
-                ? ArarkenIcon()
-                : AramazkenIcon()
+                ? const ArarkenIcon()
+                : const AramazkenIcon()
           ],
         ),
         body: WillPopScope(

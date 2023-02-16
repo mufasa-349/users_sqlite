@@ -1,5 +1,3 @@
-import 'package:userswithmvvm/models/HomePageModel.dart';
-
 import 'Kisiler.dart';
 import 'VeritabaniYardimcisi.dart';
 
@@ -35,38 +33,38 @@ class Kisilerdao {
     );
   }
 
-  Future<void> kisiEkle(String kullanici_adi, String isim, String soyisim,
-      String dogum_yili, String tckn) async {
+  Future<void> kisiEkle(String kullaniciAdi, String isim, String soyisim,
+      String dogumYili, String tckn) async {
     var db = await VeritabaniYardimcisi.veritabaniErisim();
 
-    var bilgiler = Map<String, dynamic>();
-    bilgiler["kullanici_adi"] = kullanici_adi;
+    var bilgiler = <String, dynamic>{};
+    bilgiler["kullanici_adi"] = kullaniciAdi;
     bilgiler["isim"] = isim;
     bilgiler["soyisim"] = soyisim;
-    bilgiler["dogum_yili"] = dogum_yili;
+    bilgiler["dogum_yili"] = dogumYili;
     bilgiler["tckn"] = tckn;
 
     await db.insert("kisiler", bilgiler);
   }
 
-  Future<void> kisiSil(int kisi_id) async {
+  Future<void> kisiSil(int kisiId) async {
     var db = await VeritabaniYardimcisi.veritabaniErisim();
 
-    await db.delete("kisiler", where: "kisi_id = ?", whereArgs: [kisi_id]);
+    await db.delete("kisiler", where: "kisi_id = ?", whereArgs: [kisiId]);
   }
 
-  Future<void> kisiGuncelle(int kisi_id, String kullanici_ad, String isim,
-      String soyisim, String dogum_yili, String tckn) async {
+  Future<void> kisiGuncelle(int kisiId, String kullaniciAd, String isim,
+      String soyisim, String dogumYili, String tckn) async {
     var db = await VeritabaniYardimcisi.veritabaniErisim();
 
-    var bilgiler = Map<String, dynamic>();
-    bilgiler["kullanici_adi"] = kullanici_ad;
+    var bilgiler = <String, dynamic>{};
+    bilgiler["kullanici_adi"] = kullaniciAd;
     bilgiler["isim"] = isim;
     bilgiler["soyisim"] = soyisim;
-    bilgiler["dogum_yili"] = dogum_yili;
+    bilgiler["dogum_yili"] = dogumYili;
     bilgiler["tckn"] = tckn;
 
     await db
-        .update("kisiler", bilgiler, where: "kisi_id=?", whereArgs: [kisi_id]);
+        .update("kisiler", bilgiler, where: "kisi_id=?", whereArgs: [kisiId]);
   }
 }

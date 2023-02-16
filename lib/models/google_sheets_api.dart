@@ -16,7 +16,7 @@ class GoogleSheetsApi {
 }
 
   ''';
-  static final _spreadsheetID = "16jDq-OPCX0PDGR-ntF3V8WQfB089tfcUY7gtVoIy3A4";
+  static const _spreadsheetID = "16jDq-OPCX0PDGR-ntF3V8WQfB089tfcUY7gtVoIy3A4";
   static final gsheets = GSheets(_credentials);
   static Worksheet? _worksheet;
 
@@ -30,10 +30,10 @@ class GoogleSheetsApi {
     _worksheet = ss.worksheetByTitle("Worksheet1");
   }
 
-  static Future insert(String? kullanici_adi, String? isim, String? soyisim,
-      String? dogum_yili, String? tckn) async {
+  static Future insert(String? kullaniciAdi, String? isim, String? soyisim,
+      String? dogumYili, String? tckn) async {
     await _worksheet!.values
-        .appendRow([kisi_id, kullanici_adi, isim, soyisim, dogum_yili, tckn]);
+        .appendRow([kisi_id, kullaniciAdi, isim, soyisim, dogumYili, tckn]);
   }
 
 // Google Sheets'ten veri alma başarısız

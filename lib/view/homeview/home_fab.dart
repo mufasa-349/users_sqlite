@@ -13,8 +13,8 @@ class _fabState extends State<fab> {
     return FloatingActionButton(
       onPressed: () {
         setState(() {});
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => KisiKayitSayfa()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const KisiKayitSayfa()));
       },
       tooltip: 'Increment',
       child: const Icon(Icons.add),

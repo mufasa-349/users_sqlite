@@ -37,10 +37,10 @@ class _KisiEditSayfaState extends State<KisiEditSayfa> {
 
   int epochtime = 0;
 
-  Future<void> guncelle(int kisi_id, String kullanici_adi, String isim,
-      String soyisim, String dogum_yili, String tckn) async {
+  Future<void> guncelle(int kisiId, String kullaniciAdi, String isim,
+      String soyisim, String dogumYili, String tckn) async {
     await Kisilerdao()
-        .kisiGuncelle(kisi_id, kullanici_adi, isim, soyisim, dogum_yili, tckn);
+        .kisiGuncelle(kisiId, kullaniciAdi, isim, soyisim, dogumYili, tckn);
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => Anasayfa()));
   }
@@ -179,10 +179,8 @@ class _KisiEditSayfaState extends State<KisiEditSayfa> {
         onPressed: () {
           print(tfdogum_yili.text);
           if (_formKey.currentState!.validate()) {
-            // If the form is valid, display a snackbar. In the real world,
-            // you'd often call a server or save the information in a database.
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text("Succesffully Saved")),
+              const SnackBar(content: Text("Successfully Saved")),
             );
             guncelle(widget.kisi.kisi_id, tfkullanici_adi.text, tfisim.text,
                 tfsoyisim.text, tfdogum_yili.text, tftckn.text);

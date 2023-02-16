@@ -27,12 +27,12 @@ class _KisiDetaySayfaState extends State<KisiDetaySayfa> {
     thedate = DateTime.fromMillisecondsSinceEpoch(int.parse(tfdogum_yili.text));
   }
 
-  Future<void> guncelle(int kisi_id, String kullanici_adi, String isim,
-      String soyisim, String dogum_yili, String tckn) async {
+  Future<void> guncelle(int kisiId, String kullaniciAdi, String isim,
+      String soyisim, String dogumYili, String tckn) async {
     await Kisilerdao()
-        .kisiGuncelle(kisi_id, kullanici_adi, isim, soyisim, dogum_yili, tckn);
+        .kisiGuncelle(kisiId, kullaniciAdi, isim, soyisim, dogumYili, tckn);
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => Anasayfa()));
+        context, MaterialPageRoute(builder: (context) => const Anasayfa()));
   }
 
   @override
@@ -52,7 +52,7 @@ class _KisiDetaySayfaState extends State<KisiDetaySayfa> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Kullanıcı Detay"),
+        title: const Text("Kullanıcı Detay"),
       ),
       body: Center(
         child: SingleChildScrollView(
